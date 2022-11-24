@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+  <script>
+    "use strict";
+
+    /**
+ * Adding two numbers.
+ * @param {number} number1 - First addend.
+ * @param {number} number2 - Second addend.
+ */
+    function summing(number1, number2) {
+      return Number(number1 + number2);
+    }
+
+    /**
+     * Substracting two numbers. Always substracts smaller number from bigger.
+     * @param {number} number1 - First number to substract.
+     * @param {number} number2 - Second number to substract.
+     */
+    function substraction(number1, number2) {
+      if (number1 > number2) {
+        return number1 - number2;
+      }
+      else {
+        return number2 - number1;
+      }
+    }
+
+    /**
+     * Multiplicates two numbers..
+     * @param {number} number1 - First multiplicant.
+     * @param {number} number2 - Second multiplicant.
+     */
+    function multiplication(number1, number2) {
+      return (number1 * number2);
+    }
+
+    /**
+     * Divides two numbers..
+     * @param {number} number1 - Dividend.
+     * @param {number} number2 - Divisor.
+     */
+    function division(number1, number2) {
+      return (number1 / number2);
+    }
+
+    /**
+     * Calls one of previously created functions to do math operations.
+     * @param {number} number1 - Operand 1.
+     * @param {number} number2 - Operand 2.
+     * @param {string} operation - Operation.
+     */
+    function mathOperation(number1, number2, operation) {
+      if (operation === "+") {
+        return summing(number1, number2);
+      } else if (operation === "-") {
+        return substraction(number1, number2);
+      } else if (operation === "*") {
+        return multiplication(number1, number2);
+      } else if (operation === "/") {
+        return division(number1, number2);
+      } else {
+        return NaN;
+      }
+    }
+
+    console.log(mathOperation(5, 3, "+"));
+    console.log(mathOperation(5, 3, ":)"));
+
+  </script>
+</body>
+
+</html>
