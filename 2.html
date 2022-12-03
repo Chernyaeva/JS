@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Необязательное задание, но желательно сделать.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
+-->
+  <script>
+    "use strict";
+    //ES5 Style-----------------------------------------------------------------
+
+    function PostES5(author, content) {
+      this.author = author;
+      this.content = content;
+      this.datetime = Date();
+    }
+
+    PostES5.prototype.edit = function (newContent) {
+      this.content = newContent;
+      this.datetime = Date();
+    }
+
+    const myPost = new PostES5("Успенский", "А всё-таки быть царём так же плохо\
+ как и не быть царём!");
+    console.log(myPost);
+    setTimeout(() => {
+      myPost.edit("Есть такие специальные коровы для котов. Козы называются");
+      console.log(myPost);
+    }, 5000);
+
+    function AttachedPostES5(author, content) {
+      PostES5.call(this, author, content);
+      this.highlighted = false;
+    }
+    AttachedPostES5.prototype = Object.create(PostES5.prototype);
+    AttachedPostES5.prototype.constructor = AttachedPostES5;
+
+    AttachedPostES5.prototype.makeTextHighlighted = function () {
+      this.highlighted = true;
+    }
+
+    const myPost2 = new AttachedPostES5("Успенский", "Кот Матроскин подойти к \
+телефону не может. Он очень занят. Он на печи лежит»");
+
+    console.log(myPost2);
+    myPost2.makeTextHighlighted();
+    myPost2.edit("Вам плохо живётся, — объясняет тётя. — Только вы этого не \
+понимаете. Вы по ошибке счастливы. Но я вам глаза раскрою");
+    console.log(myPost2);
+
+    //ES6 Style-----------------------------------------------------------------
+    class PostES6 {
+      constructor(author, content) {
+        this.author = author;
+        this.content = content;
+        this.datetime = Date();
+      }
+      edit(newContent) {
+        this.content = newContent;
+        this.datetime = Date();
+      }
+    }
+
+    const myPost3 = new PostES6("Маршак", "время растяжимо. Оно зависит от того\
+, какого рода содержимым Вы наполняете его.");
+    console.log(myPost3);
+
+    class AttachedPostES6 extends PostES6 {
+      constructor(author, content) {
+        super(author, content);
+        this.highlighted = false;
+      }
+      makeTextHighlighted() {
+        this.highlighted = true;
+      }
+    }
+
+    const myPost4 = new AttachedPostES6("Маршак", "Политика вас не берёт силой, \
+мы все погружены в нее, хотим мы того или нет");
+    myPost4.makeTextHighlighted();
+    myPost4.edit("CENSORED");
+    console.log(myPost4);
+  </script>
+</body>
+
+</html>
